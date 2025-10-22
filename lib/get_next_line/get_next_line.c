@@ -6,7 +6,7 @@
 /*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 12:41:24 by loda-sil          #+#    #+#             */
-/*   Updated: 2025/09/11 18:22:05 by loda-sil         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:22:01 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,4 @@ char	*get_next_line(int fd)
 	}
 	cache = split_and_store(line);
 	return (line);
-}
-#include <fcntl.h>
-#include <stdio.h>
-
-int main(void)
-{
-	int fd = open("get_next_line.h", O_RDONLY);
-	char *line;
-
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
-	return (0);
 }
