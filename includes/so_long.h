@@ -6,7 +6,7 @@
 /*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:59:54 by loda-sil          #+#    #+#             */
-/*   Updated: 2025/11/07 19:13:54 by loda-sil         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:09:40 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,11 @@ typedef struct s_game
 
 # define ESC 65307
 
-// Error
-static int	message_error(char *message);
+// Error functions
+int	message_error(char *message);
+
+// Map functions
+int map_read(t_game *game, char *map_path);
+int map_check_extension(char *filename, char *extension);
 
 #endif
