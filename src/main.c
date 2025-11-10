@@ -3,45 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:59:27 by loda-sil          #+#    #+#             */
-/*   Updated: 2025/11/01 13:58:54 by loena            ###   ########.fr       */
+/*   Updated: 2025/11/10 18:34:08 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-typedef struct s_data {
-	void *img;
-	char *addr;
-	int bits_per_pixel;
-	int line_length;
-	int endian;
-} t_data;
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+int	main(int argc, char *argv[])
 {
-	char *dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-int	main(void)
-{
-	void *mlx;
-	t_data img;
-	void *mlx_win;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 854, 480, "so_long");
-	(void)mlx_win;
-	img.img = mlx_new_image(mlx, 864, 480);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	(void)img;
-	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	t_game game;
+	
+	if (argc != 2)
+		return (message_error("invalid number of parameters!\n Use: ./program <map_path>"));
+	if (!map_check_extension(argv[1], ".ber"))
+		return (message_error("Invalid file extension! Use .ber"));
+	if (!map_read(&game, argv[1]))
+		return (1);
 	return (0);
 }
