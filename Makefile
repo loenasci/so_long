@@ -3,6 +3,7 @@ NAME = so_long
 SRCS = src/main.c \
 		src/map/map_read.c \
 		src/map/map_check.c \
+		src/map/map_utils.c \
 		src/utils/ft_error.c
 
 GNL_SRCS = lib/get_next_line/get_next_line.c \
