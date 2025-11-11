@@ -6,7 +6,7 @@
 /*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:59:54 by loda-sil          #+#    #+#             */
-/*   Updated: 2025/11/10 18:09:40 by loda-sil         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:04:55 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,14 @@ typedef struct s_game
 
 // Error functions
 int	message_error(char *message);
+int	exit_error(char *message);
 
 // Map functions
 int map_read(t_game *game, char *map_path);
+int map_check(t_game *game);
 int map_check_extension(char *filename, char *extension);
+int map_is_valid_char(char c);
+int map_count_element(char **layout, char element);
+int map_validate_element_counts(int player, int collect, int exit);
 
 #endif
