@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:08 by loda-sil          #+#    #+#             */
-/*   Updated: 2025/11/11 12:50:33 by loda-sil         ###   ########.fr       */
+/*   Updated: 2025/11/12 16:32:29 by loena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int map_is_valid_char(char c)
 {
-	if (c != '0' && c != '1' && c != 'P' && c != 'C' && c != 'E')
+	if (c != FLOOR && c != WALL && c != PLAYER && c != COLLECT && c != EXIT)
 		return (0);
 	return (1);
 }

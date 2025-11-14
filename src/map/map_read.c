@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_read.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:00:04 by loda-sil          #+#    #+#             */
-/*   Updated: 2025/11/10 17:03:01 by loda-sil         ###   ########.fr       */
+/*   Updated: 2025/11/13 23:36:28 by loena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,7 @@ int	map_read(t_game *game, char *map_path)
 	if (fd == -1)
 		return (message_error("Cannot open map!"));
 	map = ft_strdup("");
-	if (!map)
-	{
-		close(fd);
-		return (message_error("Memory allocation failed!"));
-	}
-	if (!map_read_lines(&fd, &map))
+	if (!map || !map_read_lines(&fd, &map))
 	{
 		close(fd);
 		return (message_error("Memory allocation failed!"));
@@ -69,7 +64,7 @@ int	map_read(t_game *game, char *map_path)
 	game->map.layout = ft_split(map, '\n');
 	free(map);
 	close(fd);
-	if (!game->map.layout)
+	if (!game->map.layout || !game->map.layout[0])
 		return (message_error("Cannot parse map!"));
 	map_calculate_dimensions(game);
 	return (1);
