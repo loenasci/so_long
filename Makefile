@@ -1,10 +1,15 @@
 NAME = so_long
 
+HEADERS = includes/so_long.h
+
 SRCS = src/main.c \
+		src/game/game_init.c \
 		src/map/map_read.c \
 		src/map/map_check.c \
 		src/map/map_utils.c \
-		src/utils/ft_error.c
+		src/game/game_render.c \
+		src/utils/ft_error.c \
+		src/utils/ft_free.c
 
 GNL_SRCS = lib/get_next_line/get_next_line.c \
 			lib/get_next_line/get_next_line_utils.c
@@ -12,7 +17,7 @@ GNL_SRCS = lib/get_next_line/get_next_line.c \
 OBJS = $(SRCS:.c=.o) $(GNL_SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iincludes -Ilib/minilibx-linux -Ilib/get_next_line -Ilib/libft -Ilib/ft_printf
+CFLAGS = -Wall -Werror -Wextra -g -Iincludes -Ilib/minilibx-linux -Ilib/get_next_line -Ilib/libft -Ilib/ft_printf
 
 MLX = -Llib/minilibx-linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 LIBFT = lib/libft/libft.a
@@ -25,6 +30,9 @@ $(NAME): $(OBJS)
 	make -C lib/libft
 	make -C lib/ft_printf
 	$(CC) $(OBJS) $(LIBFT) $(LIBFTPRINTF) $(MLX) -o $(NAME)
+
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
