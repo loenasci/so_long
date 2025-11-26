@@ -6,8 +6,11 @@ SRCS = src/main.c \
 		src/game/game_init.c \
 		src/map/map_read.c \
 		src/map/map_check.c \
+		src/map/map_path.c \
 		src/map/map_utils.c \
 		src/game/game_render.c \
+		src/game/game_movement.c \
+		src/game/game_exit.c \
 		src/utils/ft_error.c \
 		src/utils/ft_free.c
 
