@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:28:08 by loda-sil          #+#    #+#             */
-/*   Updated: 2025/11/12 16:32:29 by loena            ###   ########.fr       */
+/*   Updated: 2025/11/14 18:30:30 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-int map_is_valid_char(char c)
+int	map_is_valid_char(char c)
 {
 	if (c != FLOOR && c != WALL && c != PLAYER && c != COLLECT && c != EXIT)
 		return (0);
 	return (1);
 }
 
-int map_count_element(char **layout, char element)
+int	map_count_element(char **layout, char element)
 {
-	int y;
-	int x;
-	int count;
+	int	y;
+	int	x;
+	int	count;
 
 	y = 0;
 	x = 0;
@@ -41,6 +41,7 @@ int map_count_element(char **layout, char element)
 	}
 	return (count);
 }
+
 int	map_validate_element_counts(int player, int collect, int exit)
 {
 	if (player != 1)

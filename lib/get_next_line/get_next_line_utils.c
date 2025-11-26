@@ -6,7 +6,7 @@
 /*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 12:41:21 by loda-sil          #+#    #+#             */
-/*   Updated: 2025/10/29 12:48:17 by loda-sil         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:37:05 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ char	*gnl_strjoin(char *s1, char *s2)
 	j = 0;
 	if (!s1 || !s2)
 		return (0);
-	result = (char *)malloc((gnl_strlen(s1) + gnl_strlen(s2) + 1) * sizeof(char));
+	result = (char *)malloc((gnl_strlen(s1)
+				+ gnl_strlen(s2) + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
 	while (s1[i])

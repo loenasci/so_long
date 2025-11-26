@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:59:54 by loda-sil          #+#    #+#             */
-/*   Updated: 2025/11/13 23:36:32 by loena            ###   ########.fr       */
+/*   Updated: 2025/11/14 18:21:33 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
-#define SO_LONG_H
+# define SO_LONG_H
 
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/get_next_line/get_next_line.h"
@@ -32,7 +32,7 @@
 # define PLAYER_LEFT_SPRITE "assets/sprites/player/left.xpm"
 # define PLAYER_RIGHT_SPRITE "assets/sprites/player/right.xpm"
 
-#define WALL '1'
+# define WALL '1'
 # define FLOOR '0'
 # define PLAYER 'P'
 # define COLLECT 'C'
@@ -62,61 +62,75 @@ typedef struct s_mlx
 }				t_mlx;
 
 typedef struct s_img {
-	void *img;
-	char *addr;
-	int bits_per_pixel;
-	int line_length;
-	int endian;
-	int width;
-	int height;
-} t_img;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}	t_img;
 
 typedef struct s_map {
-	char **layout;
-	t_img wall;
-	t_img floor;
-	t_img collect;
-	t_img exit;
-	t_img open_exit;
-	int width;
-	int height;
-} t_map;
+	char	**layout;
+	t_img	wall;
+	t_img	floor;
+	t_img	collect;
+	t_img	exit;
+	t_img	open_exit;
+	int		width;
+	int		height;
+}	t_map;
 
 typedef struct s_player
 {
-	t_img sprite[4];
-	int direction;
-	int steps;
-	int x;
-	int y;
-} t_player;
+	t_img	sprite[4];
+	int		direction;
+	int		steps;
+	int		x;
+	int		y;
+}	t_player;
 
 typedef struct s_game
 {
-	t_mlx mlx;
-	t_map map;
-	t_player player;
-	int collectibles;
-} t_game;
+	t_mlx		mlx;
+	t_map		map;
+	t_player	player;
+	int			collectibles;
+}	t_game;
 
+typedef struct s_path_data
+{
+	char	**map;
+	int		*collect_count;
+	int		*exit_count;
+	int		width;
+	int		height;
+}	t_path_data;
 
 // Error functions
-int	message_error(char *message);
-int	exit_error(char *message);
+int		message_error(char *message);
+int		exit_error(char *message);
 
 // Map functions
-int map_read(t_game *game, char *map_path);
-int map_check(t_game *game);
-int map_check_extension(char *filename, char *extension);
-int map_is_valid_char(char c);
-int map_count_element(char **layout, char element);
-int map_validate_element_counts(int player, int collect, int exit);
+int		map_read(t_game *game, char *map_path);
+int		map_check(t_game *game);
+int		map_check_extension(char *filename, char *extension);
+int		map_is_valid_char(char c);
+int		map_count_element(char **layout, char element);
+int		map_has_valid_path(t_game *game);
+int		map_validate_element_counts(int player, int collect, int exit);
 
 // Game functions
-int game_init(t_game *game);
-void render_tile(t_game *game);
+int		game_init(t_game *game);
+void	render_tile(t_game *game);
+int		handle_keypress(int keycode, t_game *game);
 
 // Free functions
-void free_map(char **layout);
+void	free_map(char **layout);
+void	free_sprites_map(t_game *game);
+void	free_sprites_player(t_game *game);
+void	cleanup_game(t_game *game);
+int		handle_close(t_game *game);
 
 #endif
