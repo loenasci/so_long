@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 18:36:49 by loena             #+#    #+#             */
-/*   Updated: 2025/11/13 19:22:42 by loena            ###   ########.fr       */
+/*   Updated: 2025/11/14 15:01:41 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,15 @@ int	game_init(t_game *game)
 			game->map.width * SPRITE_SIZE,
 			game->map.height * SPRITE_SIZE, "so long");
 	if (!game->mlx.win)
+	{
+		cleanup_game(game);
 		return (message_error("Failed to create window!"));
-	if (!game_load_sprites_map(game))
+	}
+	if (!game_load_sprites_map(game) || !game_load_sprites_player(game))
+	{
+		cleanup_game(game);
 		return (0);
-	if (!game_load_sprites_player(game))
-		return (0);
+	}
 	game->collectibles = map_count_element(game->map.layout, COLLECT);
 	game->player.direction = PLAYER_RIGHT;
 	game->player.steps = 0;
