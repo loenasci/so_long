@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   game_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 16:49:27 by loena             #+#    #+#             */
-/*   Updated: 2025/11/13 19:22:17 by loena            ###   ########.fr       */
+/*   Updated: 2025/11/14 18:35:08 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-static void render_map(t_game *game, char tile, int x, int y)
+static void	render_map(t_game *game, char tile, int x, int y)
 {
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
 		game->map.floor.img, x * SPRITE_SIZE, y * SPRITE_SIZE);
@@ -33,10 +33,10 @@ static void render_map(t_game *game, char tile, int x, int y)
 	}
 }
 
-static void render_player(t_game *game)
+static void	render_player(t_game *game)
 {
-	int px;
-	int py;
+	int	px;
+	int	py;
 
 	px = game->player.x * SPRITE_SIZE;
 	py = game->player.y * SPRITE_SIZE;
@@ -44,10 +44,11 @@ static void render_player(t_game *game)
 		game->player.sprite[game->player.direction].img, px, py);
 }
 
-void render_tile(t_game *game)
+void	render_tile(t_game *game)
 {
-	int x;
-	int y;
+	int		x;
+	int		y;
+	char	*steps_str;
 
 	y = 0;
 	while (y < game->map.height)
@@ -60,5 +61,9 @@ void render_tile(t_game *game)
 		}
 		y++;
 	}
+	steps_str = ft_itoa(game->player.steps);
+	mlx_string_put(game->mlx.mlx, game->mlx.win, 10, 20, 0xFFFFFF, "Steps: ");
+	mlx_string_put(game->mlx.mlx, game->mlx.win, 50, 20, 0x00FF00, steps_str);
+	free(steps_str);
 	render_player(game);
 }
